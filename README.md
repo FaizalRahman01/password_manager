@@ -1,4 +1,5 @@
 Password Manager Pro
+
 A Python-based Command Line Password Manager with AES-encrypted storage, master password protection, logging, and backup functionality.
 
 Features
