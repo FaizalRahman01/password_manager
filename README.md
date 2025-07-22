@@ -1,16 +1,16 @@
-Password Manager Pro
+#Password Manager Pro
 
 A Python-based Command Line Password Manager with AES-encrypted storage, master password protection, logging, and backup functionality.
 
 Features
-✅ AES-256 Encryption using Fernet (with PBKDF2 Key Derivation and Salt)
-✅ Master Password Protection with 3 Attempt Lockout
-✅ Add, View, Search, Update, and Delete Passwords securely
-✅ Auto-generate Strong Passwords on demand
-✅ Activity Logging to logs.txt for operation tracking
-✅ Data Export & Import for safe backups and restores
-✅ CLI-based Interface with simple navigation
-✅ Built with Python 3, Cryptography, and Colorama
+ AES-256 Encryption using Fernet (with PBKDF2 Key Derivation and Salt)
+Master Password Protection with 3 Attempt Lockout
+ Add, View, Search, Update, and Delete Passwords securely
+ Auto-generate Strong Passwords on demand
+ Activity Logging to logs.txt for operation tracking
+ Data Export & Import for safe backups and restores
+CLI-based Interface with simple navigation
+ Built with Python 3, Cryptography, and Colorama
 
 Requirements
 Python 3.x
@@ -36,8 +36,8 @@ Backup & Import: Allows exporting data for backup and importing from a backup se
 
 Disclaimer
 
-⚠️ This tool is for personal and ethical use only.
-⚠️ If you forget your Master Password, your stored data will be irrecoverable.
-⚠️ Always ensure your data files are stored securely to prevent unauthorized access.
+ This tool is for personal and ethical use only.
+ If you forget your Master Password, your stored data will be irrecoverable.
+ Always ensure your data files are stored securely to prevent unauthorized access.
 
 
