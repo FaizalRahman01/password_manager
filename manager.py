@@ -51,12 +51,12 @@ def decrypt_data(token, key):
 
 
 def setup_master():
-    print(Fore.YELLOW + "\n🔒 Set Master Password (First Time):")
+    print(Fore.YELLOW + "\n Set Master Password (First Time):")
     password = getpass.getpass("Master Password: ")
     salt = os.urandom(16)
     key = derive_key(password, salt)
     save_master(key.decode(), salt)
-    print(Fore.GREEN + "✅ Master password set successfully!")
+    print(Fore.GREEN + " Master password set successfully!")
 
 
 def verify_master():
@@ -66,14 +66,14 @@ def verify_master():
         return verify_master()
 
     for attempt in range(3):
-        password = getpass.getpass(Fore.YELLOW + "\n🔑 Enter Master Password: ")
+        password = getpass.getpass(Fore.YELLOW + "\n Enter Master Password: ")
         key = derive_key(password, base64.b64decode(master['salt']))
         if key.decode() == master['hash']:
-            print(Fore.GREEN + "✅ Access Granted\n")
+            print(Fore.GREEN + " Access Granted\n")
             return key
         else:
-            print(Fore.RED + "❌ Wrong Password")
-    print(Fore.RED + "❌ Too many failed attempts. Exiting.")
+            print(Fore.RED + " Wrong Password")
+    print(Fore.RED + " Too many failed attempts. Exiting.")
     exit()
 
 
@@ -102,13 +102,13 @@ def add_password(key):
     data['accounts'].append({"site": site, "username": username, "password": encrypted_pwd})
     save_data(data)
     log_activity(f"Added password for {site}")
-    print(Fore.GREEN + "✅ Password saved successfully!")
+    print(Fore.GREEN + " Password saved successfully!")
 
 
 def view_passwords(key):
     data = load_data()
     if not data['accounts']:
-        print(Fore.YELLOW + "⚠️ No saved accounts.")
+        print(Fore.YELLOW + " No saved accounts.")
         return
     for idx, acc in enumerate(data['accounts'], 1):
         decrypted_pwd = decrypt_data(acc['password'], key)
@@ -125,13 +125,13 @@ def search_password(key):
             print(Fore.CYAN + f"{idx}. Site: {acc['site']} | Username: {acc['username']} | Password: {decrypted_pwd}")
             found = True
     if not found:
-        print(Fore.YELLOW + "❌ No matching entries found.")
+        print(Fore.YELLOW + " No matching entries found.")
 
 
 def update_password(key):
     data = load_data()
     if not data['accounts']:
-        print(Fore.YELLOW + "⚠️ No saved accounts.")
+        print(Fore.YELLOW + " No saved accounts.")
         return
     for idx, acc in enumerate(data['accounts'], 1):
         print(f"{idx}. Site: {acc['site']} | Username: {acc['username']}")
@@ -145,17 +145,17 @@ def update_password(key):
             data['accounts'][idx]['password'] = encrypt_data(new_password, key)
             save_data(data)
             log_activity(f"Updated password for {data['accounts'][idx]['site']}")
-            print(Fore.GREEN + "✅ Password updated successfully.")
+            print(Fore.GREEN + " Password updated successfully.")
         else:
-            print(Fore.RED + "❌ Invalid selection.")
+            print(Fore.RED + " Invalid selection.")
     except ValueError:
-        print(Fore.RED + "❌ Invalid input.")
+        print(Fore.RED + "Invalid input.")
 
 
 def delete_password():
     data = load_data()
     if not data['accounts']:
-        print(Fore.YELLOW + "⚠️ No saved accounts.")
+        print(Fore.YELLOW + " No saved accounts.")
         return
     for idx, acc in enumerate(data['accounts'], 1):
         print(f"{idx}. Site: {acc['site']} | Username: {acc['username']}")
@@ -167,25 +167,25 @@ def delete_password():
                 deleted = data['accounts'].pop(idx)
                 save_data(data)
                 log_activity(f"Deleted password for {deleted['site']}")
-                print(Fore.GREEN + f"✅ Deleted {deleted['site']}")
+                print(Fore.GREEN + f" Deleted {deleted['site']}")
             else:
-                print(Fore.YELLOW + "❗ Deletion cancelled.")
+                print(Fore.YELLOW + " Deletion cancelled.")
         else:
-            print(Fore.RED + "❌ Invalid selection.")
+            print(Fore.RED + " Invalid selection.")
     except ValueError:
-        print(Fore.RED + "❌ Invalid input.")
+        print(Fore.RED + " Invalid input.")
 
 
 def change_master_password():
     setup_master()
     log_activity("Changed master password")
-    print(Fore.GREEN + "✅ Master Password Changed.")
+    print(Fore.GREEN + " Master Password Changed.")
 
 
 def export_data():
     backup_name = f"backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
     shutil.copy(DATA_FILE, backup_name)
-    print(Fore.GREEN + f"✅ Data exported to {backup_name}")
+    print(Fore.GREEN + f" Data exported to {backup_name}")
     log_activity(f"Exported data to {backup_name}")
 
 
@@ -193,10 +193,10 @@ def import_data():
     import_file = input("Enter backup file name to import: ")
     if os.path.exists(import_file):
         shutil.copy(import_file, DATA_FILE)
-        print(Fore.GREEN + "✅ Data imported successfully.")
+        print(Fore.GREEN + " Data imported successfully.")
         log_activity(f"Imported data from {import_file}")
     else:
-        print(Fore.RED + "❌ File not found.")
+        print(Fore.RED + " File not found.")
 
 
 def generate_strong_password(length=16):
@@ -240,10 +240,10 @@ def main():
         elif choice == '8':
             import_data()
         elif choice == '9':
-            print(Fore.GREEN + "👋 Exiting Password Manager Pro.")
+            print(Fore.GREEN + " Exiting Password Manager Pro.")
             break
         else:
-            print(Fore.RED + "❌ Invalid option. Please try again.")
+            print(Fore.RED + " Invalid option. Please try again.")
 
 
 if __name__ == "__main__":
